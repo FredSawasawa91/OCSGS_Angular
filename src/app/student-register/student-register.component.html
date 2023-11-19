@@ -1,0 +1,45 @@
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+    <mat-card fxFlex="25" class="mat-card" style="border-radius: 20px;">
+        <mat-toolbar color="primary" style="text-align: center; border-radius: 20px 20px 0 0;"><p fxLayoutAlign="center center" fxFlexFill>STUDENT RAGISTRATION PAGE</p></mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup" (ngSubmit)="studentRegister()">
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Fullname" formControlName="fullname">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Student number" formControlName="student_number">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Email" type="email" formControlName="email">
+            </mat-form-field>
+
+            <!--mat-form-field>
+                <input type="text" matInput [matAutocomplete]="auto"/>
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of options" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field-->
+            <mat-form-field appearance="outline">
+                <mat-label>Program</mat-label>
+                <mat-select placeholder="Program" formControlName="program">
+                    <mat-option value="BAAIS">BAAIS</mat-option>
+                    <mat-option value="BBME">BBME</mat-option>
+                    <mat-option value="BMIS">BBMIS</mat-option>
+                    <mat-option value="BMPR">BMPR</mat-option>
+                    <mat-option value="BBFSM">BBFSM</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <input matInput type="password" placeholder="Password" formControlName="password">
+            </mat-form-field>
+
+            <button mat-raised-button type="submit">Register</button>
+
+            <p class="reister-text" style="margin-top: 20px; color: #fff; align-self: center;">Already registered? <a routerLink="/" class="register-link">Login here</a></p>
+        </form>
+    </mat-card>
+</div>

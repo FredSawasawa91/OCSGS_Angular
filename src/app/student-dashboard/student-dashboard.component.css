@@ -1,0 +1,24 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  table {
+    width: 80%;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .approved {
+    background-color: rgb(57, 168, 57);
+  }
+  
+  .rejected {
+    background-color: rgb(252, 62, 62);
+  }
+
+  .pending {
+    background-color: rgb(252, 217, 62);
+  }

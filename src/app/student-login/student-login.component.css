@@ -1,0 +1,15 @@
+.login-form {
+    padding: 20px;
+}
+
+.register-text {
+    display: block;
+    margin-top: 45px;
+    padding-top: 30px;
+    color: #ffffff;
+}
+
+.register-link {
+    text-decoration: none;
+    color: #007bff;
+}

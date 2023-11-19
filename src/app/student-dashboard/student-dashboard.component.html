@@ -1,0 +1,41 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Student dashboard</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="warn">Add Request</button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>person_pin</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="container">
+    <div style="margin-top: 10px;">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Type Column -->
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> TYPE </th>
+              <td mat-cell *matCellDef="let row" class="row" [ngClass]="{'pending': row.status === 'pending', 'rejected': row.status === 'rejected', 'approved': row.status === 'approved'}" style="font-weight: bold;"> {{row.type.toUpperCase()}} </td>
+            </ng-container>
+          
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> STATUS </th>
+              <td mat-cell *matCellDef="let row" class="row" [ngClass]="{'pending': row.status === 'pending', 'rejected': row.status === 'rejected', 'approved': row.status === 'approved'}" style="font-weight: bold;"> {{capitalizeFirstLetter(row.status)}} </td>
+            </ng-container>
+          
+            <!-- Comment Column -->
+            <ng-container matColumnDef="staff_comment">
+              <th mat-header-cell *matHeaderCellDef> COMMENT </th>
+              <td mat-cell *matCellDef="let row" class="row" [ngClass]="{'pending': row.status === 'pending', 'rejected': row.status === 'rejected', 'approved': row.status === 'approved'}"> {{row.staff_comment}} </td>
+            </ng-container>
+           
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+    </div>
+</div>
