@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Clearance Request</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>The following requests will be created</h3>
+  <div mat-dialog-content>
+    <ul>
+        <li>Accounts</li>
+        <li>Library</li>
+        <li>Admissions</li>
+        <li>Research</li>
+      </ul>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="addRequests()">Create</button>
+</mat-dialog-actions>

@@ -33,8 +33,15 @@ export class StaffLoginComponent implements OnInit {
         if(result.success){
           console.log(result.token);
           localStorage.setItem('staff_token', result.token);
-          this.router.navigate(['staff_dashboard']);
-          alert(result.message);
+
+          if(result.role == 'admin'){
+            this.router.navigate(['admin_dashboard']);
+            alert(result.message);
+          } else {
+            this.router.navigate(['staff_dashboard']);
+            alert(result.message);
+          }
+          
         } else if (!result.success) {
           alert('Invalid email or password');
         }

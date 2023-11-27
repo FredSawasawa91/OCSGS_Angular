@@ -15,6 +15,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatMenuModule} from '@angular/material/menu';
 import { StudentRegisterComponent } from './student-register/student-register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +26,10 @@ import { StaffDashboardComponent } from './staff-dashboard/staff-dashboard.compo
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { AuthGuard } from './guard/staff-auth.guard';
 import { StudentAuthGuard } from './guard/student-auth.guard';
+import { DialogComponent } from './dialog/dialog.component';
+import { AdminDashbordComponent } from './admin-dashbord/admin-dashbord.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +37,11 @@ import { StudentAuthGuard } from './guard/student-auth.guard';
     routingComponents,
     StudentRegisterComponent,
     StaffDashboardComponent,
-    StudentDashboardComponent
+    StudentDashboardComponent,
+    DialogComponent,
+    AdminDashbordComponent,
+    ConfirmDialogComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +57,10 @@ import { StudentAuthGuard } from './guard/student-auth.guard';
     MatIconModule,
     MatTableModule,
     MatAutocompleteModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatMenuModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule

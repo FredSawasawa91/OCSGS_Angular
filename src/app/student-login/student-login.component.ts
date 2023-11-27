@@ -40,9 +40,10 @@ export class StudentLoginComponent implements OnInit {
           
           alert(result.message);
 
-        } else if (!result.success) {
+        } else  {
 
           alert('Invalid email or password');
+          //alert(result.message);
         
         }
       })

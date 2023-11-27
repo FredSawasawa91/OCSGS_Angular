@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { MatTableDataSource } from '@angular/material/table';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+import { Router } from '@angular/router';
 
 export interface Requests {
   completion_date?: string;
@@ -24,7 +27,7 @@ export class StudentDashboardComponent implements OnInit {
   displayedColumns: string[] = ['type', 'status', 'staff_comment'];
   dataSource = new MatTableDataSource<Requests>([]);
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.getClearanceRequest();
@@ -34,7 +37,6 @@ export class StudentDashboardComponent implements OnInit {
     this.api.getRequestsStudent()
       .subscribe({
         next: (results) => {
-          // Update the MatTableDataSource directly
           this.dataSource.data = results.clearance;
         },
         error: (err) => {
@@ -45,5 +47,18 @@ export class StudentDashboardComponent implements OnInit {
 
   capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogComponent);
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  logout(){
+    localStorage.removeItem('student_token');
+    this.router.navigate(['student_login']);    
   }
 }

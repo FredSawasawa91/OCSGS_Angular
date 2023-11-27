@@ -4,10 +4,9 @@
     </button>
     <span>Student dashboard</span>
     <span class="example-spacer"></span>
-    <button mat-raised-button color="warn">Add Request</button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>person_pin</mat-icon>
-    </button>
+    <button mat-button>Profile</button>
+    <button mat-button (click)="logout()">Logout</button>
+    <button mat-raised-button color="accent" style="margin-left: 8px;" (click)="openDialog()">Add Request</button>
 </mat-toolbar>
 
 <div class="container">

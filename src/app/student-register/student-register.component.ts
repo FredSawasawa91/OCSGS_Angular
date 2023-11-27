@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentRegistrationServiceService } from '../service/student-registration-service.service';
 
 @Component({
@@ -13,14 +13,14 @@ export class StudentRegisterComponent implements OnInit {
 
   formGroup!: FormGroup;
   
-  constructor(private studentRegistrationService: StudentRegistrationServiceService){}
+  constructor(private studentRegistrationService: StudentRegistrationServiceService, private formBuilder: FormBuilder){}
 
   ngOnInit() {
     this.initForm()
   }
   
   initForm(){
-    this.formGroup = new FormGroup({
+    this.formGroup = this.formBuilder.group({
       fullname: new FormControl('', [Validators.required]),
       student_number: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),

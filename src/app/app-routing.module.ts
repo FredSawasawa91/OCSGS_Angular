@@ -7,6 +7,8 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
 import { StaffDashboardComponent } from './staff-dashboard/staff-dashboard.component';
 import { AuthGuard } from './guard/staff-auth.guard';
 import { StudentAuthGuard } from './guard/student-auth.guard';
+import { AdminDashbordComponent } from './admin-dashbord/admin-dashbord.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,11 @@ const routes: Routes = [
     component:StudentRegisterComponent
   },
   {
+    path:'add_user', 
+    component:AddUserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path:'student_dashboard', 
     component:StudentDashboardComponent,
     canActivate: [StudentAuthGuard]
@@ -33,6 +40,11 @@ const routes: Routes = [
   {
     path:'staff_dashboard', 
     component:StaffDashboardComponent,
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path:'admin_dashboard', 
+    component:AdminDashbordComponent,
     canActivate: [AuthGuard]
   }];
 
