@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Router } from '@angular/router';
+import { StudentProfileComponent } from '../student-profile/student-profile.component';
 
 export interface Requests {
   completion_date?: string;
@@ -57,8 +58,17 @@ export class StudentDashboardComponent implements OnInit {
     });
   }
 
+  openProfileDialog() {
+    const dialogRef = this.dialog.open(StudentProfileComponent);
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   logout(){
     localStorage.removeItem('student_token');
-    this.router.navigate(['student_login']);    
+    this.router.navigate(['']);    
   }
+  
 }

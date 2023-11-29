@@ -28,24 +28,16 @@ export class StudentLoginComponent implements OnInit {
 
   studentLogin(){
     if(this.formGroup.valid){
-      this.studentAuthService.login(this.formGroup.value).subscribe(result=>{
-        
-        if(result.success){
-          
-          //console.log(result.token);
-          
-          localStorage.setItem('student_token', result.token);  
-          
+      this.studentAuthService.login(this.formGroup.value).subscribe({
+        next: (res) => {
+          localStorage.setItem('student_token', res.token);  
           this.router.navigate(['student_dashboard'])
-          
-          alert(result.message);
-
-        } else  {
-
+          alert(res.message);
+        },
+        error: (e) => {
           alert('Invalid email or password');
-          //alert(result.message);
-        
         }
+        
       })
     }
   }

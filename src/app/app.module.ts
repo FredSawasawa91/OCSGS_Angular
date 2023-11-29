@@ -30,6 +30,8 @@ import { DialogComponent } from './dialog/dialog.component';
 import { AdminDashbordComponent } from './admin-dashbord/admin-dashbord.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { StaffProfileComponent } from './staff-profile/staff-profile.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AddUserComponent } from './add-user/add-user.component';
     DialogComponent,
     AdminDashbordComponent,
     ConfirmDialogComponent,
-    AddUserComponent
+    AddUserComponent,
+    StudentProfileComponent,
+    StaffProfileComponent
   ],
   imports: [
     BrowserModule,

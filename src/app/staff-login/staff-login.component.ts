@@ -28,21 +28,20 @@ export class StaffLoginComponent implements OnInit {
 
   staffLogin(){
     if(this.formGroup.valid){
-      this.staffAuthService.login(this.formGroup.value).subscribe(result=>{
-        //console.log(result);
-        if(result.success){
-          console.log(result.token);
-          localStorage.setItem('staff_token', result.token);
+      this.staffAuthService.login(this.formGroup.value).subscribe({
+        next: (res) => {
+          console.log(res.token);
+          localStorage.setItem('staff_token', res.token);
 
-          if(result.role == 'admin'){
+          if(res.role == 'admin'){
             this.router.navigate(['admin_dashboard']);
-            alert(result.message);
+            alert(res.message);
           } else {
             this.router.navigate(['staff_dashboard']);
-            alert(result.message);
+            alert(res.message);
           }
-          
-        } else if (!result.success) {
+        },
+        error: (e) => {
           alert('Invalid email or password');
         }
       })

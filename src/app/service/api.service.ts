@@ -45,6 +45,14 @@ export class ApiService {
     return this.http.get<any>(`${baseUrl}/staff`, options)
   }
 
+  deleteUser(id: number){
+    const token = localStorage.getItem('staff_token');
+    const headers = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = { headers: headers };
+
+    return this.http.delete<any>(`${baseUrl}/staff/`+id, options)
+  }
+
   createRequests(){
     const token = localStorage.getItem('student_token');
     const header = new HttpHeaders({ 'Authorization': `${token}` });
@@ -69,6 +77,48 @@ export class ApiService {
     const options = { headers: headers };
 
     return this.http.put<any>(`${baseUrl}/clearance/staff/`+id, data, options)
+  }
+
+  getStudentProfileDetails(){
+
+    const token = localStorage.getItem('student_token');
+    const header = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = {
+       headers: header,
+    };
+
+    return this.http.get<any>(`${baseUrl}/student`, options)
+  }
+
+  getStaffProfileDetails(){
+
+    const token = localStorage.getItem('staff_token');
+    const header = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = {
+       headers: header,
+    };
+
+    return this.http.get<any>(`${baseUrl}/staff/staff/byid`, options)
+  }
+
+  updateStudent(data: any){
+    const token = localStorage.getItem('student_token');
+    const header = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = {
+       headers: header,
+    };
+
+    return this.http.put(`${baseUrl}/student`, data, options);
+  }
+
+  updateStaff(data: any){
+    const token = localStorage.getItem('staff_token');
+    const header = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = {
+       headers: header,
+    };
+
+    return this.http.put(`${baseUrl}/staff`, data, options);
   }
 
 }

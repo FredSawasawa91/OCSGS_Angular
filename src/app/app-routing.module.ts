@@ -11,12 +11,9 @@ import { AdminDashbordComponent } from './admin-dashbord/admin-dashbord.componen
 import { AddUserComponent } from './add-user/add-user.component';
 
 const routes: Routes = [
+  
   {
     path:'', 
-    component:StudentLoginComponent
-  },
-  {
-    path:'student_login', 
     component:StudentLoginComponent
   },
   {

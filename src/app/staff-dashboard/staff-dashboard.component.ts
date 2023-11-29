@@ -9,6 +9,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ApiService } from '../service/api.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { StaffProfileComponent } from '../staff-profile/staff-profile.component';
 
 export interface requestAction {
   status: string;
@@ -28,7 +30,7 @@ export class StaffDashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private api: ApiService, private router: Router){}
+  constructor(private api: ApiService, private dialog: MatDialog, private router: Router){}
 
   ngOnInit(): void {
     this.getClearanceRequest();
@@ -88,6 +90,14 @@ export class StaffDashboardComponent implements OnInit {
         alert('Error!!');
       }
     })
+  }
+
+  openProfileDialog() {
+    const dialogRef = this.dialog.open(StaffProfileComponent);
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   logout(){

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Update Profile</h2>
+<mat-dialog-content class="mat-typography">
+    <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup">
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Fullname" formControlName="fullname">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Student number" formControlName="student_number">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Email" type="email" formControlName="email">
+        </mat-form-field>
+
+        <!--mat-form-field>
+            <input type="text" matInput [matAutocomplete]="auto"/>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of options" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field-->
+        <mat-form-field appearance="outline">
+            <mat-label>Program</mat-label>
+            <mat-select placeholder="Program" formControlName="program">
+                <mat-option value="BAAIS">BAAIS</mat-option>
+                <mat-option value="BBME">BBME</mat-option>
+                <mat-option value="BMIS">BMIS</mat-option>
+                <mat-option value="BMPR">BMPR</mat-option>
+                <mat-option value="BBFSM">BBFSM</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input matInput type="password" placeholder="Password" formControlName="password">
+        </mat-form-field>
+
+        <!--button mat-raised-button type="submit">Update</button-->
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="updateStudent()">Update</button>
+</mat-dialog-actions>

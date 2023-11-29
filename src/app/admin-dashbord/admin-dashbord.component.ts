@@ -7,6 +7,16 @@ import { ApiService } from '../service/api.service';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { Router } from '@angular/router';
 
+/*export interface staffResponse {
+  createdAt: string,
+  email: string,
+  fullname: string,
+  id: number,
+  password: string,
+  role: string,
+  updatedAt: string
+}*/
+
 @Component({
   selector: 'app-admin-dashbord',
   templateUrl: './admin-dashbord.component.html',
@@ -40,7 +50,7 @@ export class AdminDashbordComponent implements OnInit {
     this.api.getUsers()
     .subscribe({
         next: (results) => {
-          console.log(results);
+          console.log(results.staff);
           this.dataSource = new MatTableDataSource(results.staff);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort; 
@@ -53,7 +63,15 @@ export class AdminDashbordComponent implements OnInit {
   }
 
   deleteUser(id: number){
-    console.log(id);
+    this.api.deleteUser(id)
+    .subscribe({
+      next: (res) => {
+        alert(res.message);
+      },
+      error: (e) => {
+        alert('User not deleted');
+      }
+    })
   }
 
   applyFilter(event: Event) {
