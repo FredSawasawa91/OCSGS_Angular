@@ -101,6 +101,17 @@ export class ApiService {
     return this.http.get<any>(`${baseUrl}/staff/staff/byid`, options)
   }
 
+  getClearanceDetails(){
+
+    const token = localStorage.getItem('student_token');
+    const header = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = {
+       headers: header,
+    };
+
+    return this.http.get<any>(`${baseUrl}/clearance/student/requests`, options)
+  }
+
   updateStudent(data: any){
     const token = localStorage.getItem('student_token');
     const header = new HttpHeaders({ 'Authorization': `${token}` });

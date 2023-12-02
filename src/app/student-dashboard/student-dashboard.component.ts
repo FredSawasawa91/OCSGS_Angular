@@ -1,3 +1,5 @@
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -5,6 +7,9 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Router } from '@angular/router';
 import { StudentProfileComponent } from '../student-profile/student-profile.component';
+import { Alignment, Margins } from 'pdfmake/interfaces';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export interface Requests {
   completion_date?: string;
@@ -45,6 +50,95 @@ export class StudentDashboardComponent implements OnInit {
         }
       })
   }
+
+  getClearanceDetails(){
+    this.api.getClearanceDetails()
+      .subscribe({
+        next: (res) => {
+          //console.log(res.clearance);
+          const clearances = res.clearance;
+
+        // Check if clearances array is not empty
+        if (clearances && clearances.length > 0) {
+          const firstStudentFullName = clearances[0].student_fullname;
+          const firstStudentNumber = clearances[0].student_number;
+          const firstStudentProgram = clearances[0].program;
+
+          clearances.forEach((clearance: { status: any; }, index: number) => {
+            console.log(`Student ${index + 1} Full Name: ${clearance.status}`);
+
+            let dd = {
+              content: [
+                {
+                  text: 'FINAL YEAR CLEARANCE REQUEST REPORT',
+                  style: 'header',
+                  alignment: 'center' as Alignment
+                },
+                {
+                  text: `Student Name: ${firstStudentFullName}`,
+                  style: 'subheader'
+                },
+                {
+                  text: `Student Number: ${firstStudentNumber}`,
+                  style: 'subheader'
+                },
+                {
+                  text: `Program: ${firstStudentProgram}`,
+                  style: 'subheader'
+                }
+              ],
+              styles: {
+                header: {
+                  fontSize: 18,
+                  bold: true,
+                  alignment: 'justify' as Alignment,
+                  margin: [0, 0, 0, 20] as Margins
+                },
+                subheader: {
+                  fontSize: 14,
+                  bold: true,
+                  alignment: 'left' as Alignment,
+                  margin: [0, 10, 0, 0] as Margins
+                }
+              }
+            };
+        
+            pdfMake.createPdf(dd).open();
+
+
+          });
+        } else {
+          console.log('No clearance data available.');
+        }
+
+        },
+        error: (e) => {
+          alert('Failed to retrieve data');
+        }
+      })
+  }
+
+  /*print() {
+    
+    let dd = {
+      content: [
+        {
+          text: 'FINAL YEAR CLEARANCE REQUEST REPORT',
+          style: 'header',
+          alignment: 'center' as Alignment
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'justify' as Alignment
+        }
+      }
+    };
+
+    pdfMake.createPdf(dd).open();
+  }*/
 
   capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);

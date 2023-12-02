@@ -6,6 +6,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { ApiService } from '../service/api.service';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { Router } from '@angular/router';
+import { StaffProfileComponent } from '../staff-profile/staff-profile.component';
 
 /*export interface staffResponse {
   createdAt: string,
@@ -40,6 +41,14 @@ export class AdminDashbordComponent implements OnInit {
     const dialogRef = this.dialog.open(AddUserComponent, {
       width: '40%', // Set the width to 40%
     });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openProfileDialog() {
+    const dialogRef = this.dialog.open(StaffProfileComponent);
   
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

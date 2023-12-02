@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { routingComponents } from './app-routing.module';
@@ -49,6 +49,7 @@ import { StaffProfileComponent } from './staff-profile/staff-profile.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FlexLayoutModule,
     MatFormFieldModule,
