@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student-profile',
@@ -45,30 +46,29 @@ export class StudentProfileComponent implements OnInit {
   }
 
   updateStudent(){
-    if(this.formGroup.valid){
-      this.api.updateStudent(this.formGroup.value)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          alert('Student updated successfully');
-        }, 
-        error: (e) => {
-          alert('Student not updated');
+    Swal.fire({
+      title: 'Update profile',
+      text: 'Are you sure you want to update your profile?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if(this.formGroup.valid){
+          this.api.updateStudent(this.formGroup.value)
+          .subscribe({
+            next: (res) => {
+              Swal.fire('Success', 'Profile updated successfully', 'success');
+            }, 
+            error: (e) => {
+              Swal.fire('Error', 'Error. Profile not updated', 'error');
+            }
+          })
+        } else {
+          Swal.fire('Error', 'Form data not valid', 'info');
         }
-      })
-      
-      
-      /*(result=>{
-        //console.log(result);
-
-        if(result.success){
-          console.log(result);
-          alert(result.message);
-        } else if (!result.success) {
-          alert('Registration failed');
-        }
-      })*/
-    }
+      }
+    })  
   }
-
 }

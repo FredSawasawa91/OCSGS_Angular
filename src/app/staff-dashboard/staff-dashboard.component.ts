@@ -11,6 +11,7 @@ import { ApiService } from '../service/api.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { StaffProfileComponent } from '../staff-profile/staff-profile.component';
+import Swal from 'sweetalert2';
 
 export interface requestAction {
   status: string;
@@ -58,38 +59,75 @@ export class StaffDashboardComponent implements OnInit {
       email: email
     };
 
-    console.log(id)
-    this.api.approveRequest(data, id).
-    subscribe({
+    Swal.fire({
+      title: 'Approve request',
+      text: 'Are you sure you want to approve the selected request?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.approveRequest(data, id).
+      subscribe({
       next: (res) => {
         console.log(res);
-        alert('Request approved!!');
+        Swal.fire('Success', 'Request approved', 'success');
       },
       error: () => {
-        alert('Error!!');
+        Swal.fire('Error', 'Error', 'error');
       }
-    })
+      }) 
+      } else {
+        Swal.fire('Cancelled', 'Cancelled', 'info');
+      }
+    });
   }
 
   rejectRequest(id: number, email: string){
-    
-    console.log(id);
     const data: requestAction = {
       status: 'rejected',
       email: email
     };
 
-    console.log(id)
-    this.api.approveRequest(data, id).
+    Swal.fire({
+      title: 'Reject request',
+      text: 'Are you sure you want to reject the selected request?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.approveRequest(data, id).
+      subscribe({
+      next: (res) => {
+        console.log(res);
+        Swal.fire('Success', 'Request rejected', 'success');
+      },
+      error: () => {
+        Swal.fire('Error', 'Error', 'error');
+      }
+      }) 
+      } else {
+        Swal.fire('Cancelled', 'Cancelled', 'info');
+      }
+    });
+
+    /*const confirmReject = confirm('Reject student request?');
+
+    if (confirmReject) {
+      this.api.approveRequest(data, id).
     subscribe({
       next: (res) => {
         console.log(res)
         alert('Request rejected!!');
       },
       error: () => {
-        alert('Error!!');
+        alert('Error!!!');
       }
     })
+    }*/
   }
 
   openProfileDialog() {

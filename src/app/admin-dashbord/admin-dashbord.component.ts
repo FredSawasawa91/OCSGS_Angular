@@ -7,6 +7,7 @@ import { ApiService } from '../service/api.service';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { Router } from '@angular/router';
 import { StaffProfileComponent } from '../staff-profile/staff-profile.component';
+import Swal from 'sweetalert2';
 
 /*export interface staffResponse {
   createdAt: string,
@@ -72,7 +73,28 @@ export class AdminDashbordComponent implements OnInit {
   }
 
   deleteUser(id: number){
-    this.api.deleteUser(id)
+    Swal.fire({
+      title: 'Delete User',
+      text: 'Are you sure you want to delete selected user?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.deleteUser(id)
+          .subscribe({
+          next: (res) => {
+            Swal.fire('Success', `${res.message}`, 'success');
+          },
+          error: (e) => {
+            Swal.fire('Error', 'User not deleted', 'error');
+      }
+    })
+      }
+    })
+    
+    /*this.api.deleteUser(id)
     .subscribe({
       next: (res) => {
         alert(res.message);
@@ -80,7 +102,7 @@ export class AdminDashbordComponent implements OnInit {
       error: (e) => {
         alert('User not deleted');
       }
-    })
+    })*/
   }
 
   applyFilter(event: Event) {

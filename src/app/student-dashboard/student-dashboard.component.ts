@@ -55,7 +55,7 @@ export class StudentDashboardComponent implements OnInit {
     this.api.getClearanceDetails()
       .subscribe({
         next: (res) => {
-          //console.log(res.clearance);
+          console.log(res.clearance);
           const clearances = res.clearance;
 
         // Check if clearances array is not empty
@@ -85,6 +85,22 @@ export class StudentDashboardComponent implements OnInit {
                 {
                   text: `Program: ${firstStudentProgram}`,
                   style: 'subheader'
+                },
+                {
+                  table: {
+                    headerRows: 1,
+                    widths: [ '*', '*', '*' ],
+                    //headers: ['Type', 'Status', 'Student Fullname'],
+                    heights: [20],
+                    body:
+                      [[{text:'TYPE', style: 'tableHeader'}, {text: 'STATUS', style: 'tableHeader'}, {text: 'APPROVED/REJECTED BY', style: 'tableHeader'}]].concat(
+                        clearances.map((item: { type: any; status: any; staff_fullname: any; }) => [
+                        this.capitalizeFirstLetter(item.type),
+                        this.capitalizeFirstLetter(item.status),
+                        item.staff_fullname
+                      ])) 
+                  },
+                  style: 'table'
                 }
               ],
               styles: {
@@ -99,6 +115,15 @@ export class StudentDashboardComponent implements OnInit {
                   bold: true,
                   alignment: 'left' as Alignment,
                   margin: [0, 10, 0, 0] as Margins
+                },
+                table: {
+                  margin: [0, 20, 0, 0] as Margins,
+                  widths: [ '*', 'auto', 100, '*' ]
+                },
+                tableHeader: {
+                  bold: true,
+                  fontSize: 13,
+                  color: 'black'
                 }
               }
             };

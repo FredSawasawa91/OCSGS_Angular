@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from '../service/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-staff-profile',
@@ -44,20 +45,30 @@ export class StaffProfileComponent implements OnInit {
   }
 
   updateUser(){
-    if(this.formGroup.valid){
-      this.api.updateStaff(this.formGroup.value)
-      .subscribe({
-        next: (result) => {
-          console.log(result);
-          alert('User profile updated');
-          this.formGroup.reset();
-          this.matDialogRef.close();
-        },
-        error: (err) => {
-          alert('Error updating user');
+    Swal.fire({
+      title: 'Update profile',
+      text: 'Are you sure you want to update your profile?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if(this.formGroup.valid){
+          this.api.updateStaff(this.formGroup.value)
+          .subscribe({
+            next: (res) => {
+              Swal.fire('Success', 'Profile updated successfully', 'success');
+            }, 
+            error: (e) => {
+              Swal.fire('Error', 'Error. Profile not updated', 'error');
+            }
+          })
+        } else {
+          Swal.fire('Error', 'Form data not valid', 'info');
         }
-      })
-    }
+      }
+    })
   }
 
 }
