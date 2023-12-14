@@ -143,28 +143,6 @@ export class StudentDashboardComponent implements OnInit {
       })
   }
 
-  /*print() {
-    
-    let dd = {
-      content: [
-        {
-          text: 'FINAL YEAR CLEARANCE REQUEST REPORT',
-          style: 'header',
-          alignment: 'center' as Alignment
-        }
-      ],
-      styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
-          alignment: 'justify' as Alignment
-        }
-      }
-    };
-
-    pdfMake.createPdf(dd).open();
-  }*/
-
   capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }

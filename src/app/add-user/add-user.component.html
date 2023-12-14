@@ -25,42 +25,8 @@
         </mat-form-field>
 
         <div mat-dialog-actions [align]="'end'">
-            <button mat-raised-button color="accent" mat-dialog-close>Close</button>
-            <button style="margin-left: 8px;" mat-raised-button color="warn" type="submit">Add User</button>
+            <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+            <button style="margin-left: 8px;" mat-raised-button color="primary" type="submit">Add User</button>
         </div>
     </form>
 </div>
-
-
-<!--div fxLayoutAlign="center center" fxFlexFill class="main-div">
-    <mat-card fxFlex="25" class="mat-card" style="border-radius: 20px;">
-        <mat-toolbar color="primary" style="text-align: center; border-radius: 20px 20px 0 0;"><p fxLayoutAlign="center center" fxFlexFill>ADD USER</p></mat-toolbar>
-        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup" (ngSubmit)="addUser()">
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Fullname" formControlName="fullname">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Email" type="email" formControlName="email">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Role</mat-label>
-                <mat-select placeholder="Role" formControlName="role">
-                    <mat-option value="library">Librarian</mat-option>
-                    <mat-option value="admissions">Addmissions</mat-option>
-                    <mat-option value="accounts">Accountant</mat-option>
-                    <mat-option value="research">Research cordinator</mat-option>
-                    <mat-option value="cd">Campus director</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <input matInput type="password" placeholder="Password" formControlName="password">
-            </mat-form-field>
-
-            <button mat-raised-button type="submit">Add User</button>
-
-        </form>
-    </mat-card>
-</div-->

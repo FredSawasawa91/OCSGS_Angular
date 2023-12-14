@@ -12,13 +12,16 @@
   }
 
   .approved {
-    background-color: rgb(57, 168, 57);
+    /*background-color: rgb(57, 168, 57);*/
+    background-color: rgb(204, 255, 221);
   }
   
   .rejected {
-    background-color: rgb(252, 62, 62);
+    /*background-color: rgb(252, 62, 62);*/
+    background-color: rgb(255, 204, 204);
   }
 
   .pending {
-    background-color: rgb(192, 163, 36);
+    /*background-color: rgb(192, 163, 36);*/
+    background-color: rgb(255, 255, 204);
   }

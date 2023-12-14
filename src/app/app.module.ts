@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { StudentRegisterComponent } from './student-register/student-register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -66,6 +67,7 @@ import { StaffProfileComponent } from './staff-profile/staff-profile.component';
     MatPaginatorModule,
     MatSortModule,
     MatMenuModule,
+    MatTooltipModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule

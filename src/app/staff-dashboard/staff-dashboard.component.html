@@ -1,10 +1,6 @@
-<mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
+<mat-toolbar color="primary">
     <span>Staff dashboard</span>
     <span class="example-spacer"></span>
-    <!--button mat-raised-button color="warn" (click)="openDialog()">Add Request</button-->
     <button mat-button (click)="openProfileDialog()">Profile</button>
     <button mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
@@ -15,7 +11,7 @@
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-          </mat-form-field>
+        </mat-form-field>
           
           <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
@@ -52,10 +48,12 @@
               <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </th>
                 <td mat-cell *matCellDef="let row"> 
-                    <button mat-icon-button color="accent" (click)="approveRequest(row.id, row.email)">
+                    <button mat-icon-button color="primary" (click)="approveRequest(row.id, row.email)" 
+                    matTooltip="Approve" matTooltipHideDelay="1000">
                         <mat-icon>check_circle</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" (click)="rejectRequest(row.id, row.email)">
+                    <button mat-icon-button color="warn" (click)="rejectRequest(row.id, row.email)"
+                    matTooltip="Reject" matTooltipHideDelay="1000">
                         <mat-icon>clear</mat-icon>
                     </button>
                 </td>

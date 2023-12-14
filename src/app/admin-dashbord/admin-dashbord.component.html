@@ -1,12 +1,9 @@
-<mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
+<mat-toolbar color="primary">
     <span>Admin dashboard</span>
     <span class="example-spacer"></span>
     <button mat-button (click)="openProfileDialog()">Profile</button>
     <button style="margin-right: 8px;" mat-button (click)="logout()">Logout</button>
-    <button mat-raised-button color="primary" (click)="openDialog()">Add New User</button>
+    <button mat-raised-button color="accent" (click)="openDialog()">Add New User</button>
 </mat-toolbar>
 
 <div class="container">
@@ -41,7 +38,8 @@
               <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </th>
                 <td mat-cell *matCellDef="let row"> 
-                    <button mat-icon-button color="accent" (click)="deleteUser(row.id)">
+                    <button mat-icon-button color="warn" (click)="deleteUser(row.id)"
+                    matTooltip="Delete" matTooltipHideDelay="1000">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>

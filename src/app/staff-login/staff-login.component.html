@@ -1,5 +1,5 @@
 <div fxLayoutAlign="center center" fxFlexFill class="main-div">
-    <mat-card fxFlex="25" style="border-radius: 20px;">
+    <mat-card fxFlex="40" style="border-radius: 20px;">
         <mat-toolbar color="primary" style="border-radius: 20px 20px 0 0;"><p fxLayoutAlign="center center" fxFlexFill>Staff login page</p></mat-toolbar>
         <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup" (ngSubmit)="staffLogin()">
             <mat-form-field appearance="outline">
@@ -11,7 +11,7 @@
             </mat-form-field>
 
             <button mat-raised-button type="submit" color="primary">Login</button>
-            <p class="reister-text" style="margin-top: 10px; color: #fff; align-self: center;">Login as student <a routerLink="" class="register-link">here</a></p>
+            <p class="reister-text" style="margin-top: 20px; align-self: center;">Login as student <a routerLink="" class="register-link">here</a></p>
         </form>
     </mat-card>
 </div>
