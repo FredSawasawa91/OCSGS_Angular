@@ -24,7 +24,7 @@ export class StaffProfileComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       fullname: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
-      role: new FormControl('', [Validators.required]),
+      role: new FormControl({value: '', disabled: true}, [Validators.required]),
       password: new FormControl('', [Validators.required])
     })
   }

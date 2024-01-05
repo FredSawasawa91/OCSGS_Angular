@@ -37,12 +37,28 @@ export class ApiService {
     return this.http.post(`${baseUrl}/staff`, data, options);
   }
 
+  editUser(data: any, id: number): Observable<any>{
+    const token = localStorage.getItem('staff_token');
+    const headers = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = { headers: headers };
+    
+    return this.http.patch(`${baseUrl}/staff/`+id, data, options);
+  }
+
   getUsers() {
     const token = localStorage.getItem('staff_token');
     const headers = new HttpHeaders({ 'Authorization': `${token}` });
     const options = { headers: headers };
 
     return this.http.get<any>(`${baseUrl}/staff`, options)
+  }
+
+  getUser(id: number) {
+    const token = localStorage.getItem('staff_token');
+    const headers = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = { headers: headers };
+
+    return this.http.get<any>(`${baseUrl}/staff/staff/`+id, options)
   }
 
   deleteUser(id: number){
@@ -110,6 +126,22 @@ export class ApiService {
     };
 
     return this.http.get<any>(`${baseUrl}/clearance/student/requests`, options)
+  }
+
+  getApprovedStudents(){
+    const token = localStorage.getItem('staff_token');
+    const headers = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = { headers: headers };
+
+    return this.http.get<any>(`${baseUrl}/student/cleared_students`, options)
+  }
+
+  getApprovedStudentsByType(){
+    const token = localStorage.getItem('staff_token');
+    const headers = new HttpHeaders({ 'Authorization': `${token}` });
+    const options = { headers: headers };
+
+    return this.http.get<any>(`${baseUrl}/student/cleared_students_by_type`, options)
   }
 
   updateStudent(data: any){

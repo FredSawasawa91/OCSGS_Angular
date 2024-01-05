@@ -20,6 +20,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatChipsModule} from '@angular/material/chips';
 import { StudentRegisterComponent } from './student-register/student-register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,6 +34,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { AddUserComponent } from './add-user/add-user.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { StaffProfileComponent } from './staff-profile/staff-profile.component';
     ConfirmDialogComponent,
     AddUserComponent,
     StudentProfileComponent,
-    StaffProfileComponent
+    StaffProfileComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { StaffProfileComponent } from './staff-profile/staff-profile.component';
     MatSortModule,
     MatMenuModule,
     MatTooltipModule,
+    MatChipsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule

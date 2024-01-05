@@ -93,7 +93,7 @@ export class StudentDashboardComponent implements OnInit {
                     //headers: ['Type', 'Status', 'Student Fullname'],
                     heights: [20],
                     body:
-                      [[{text:'TYPE', style: 'tableHeader'}, {text: 'STATUS', style: 'tableHeader'}, {text: 'APPROVED/REJECTED BY', style: 'tableHeader'}]].concat(
+                      [[{text:'SERVICE', style: 'tableHeader'}, {text: 'STATUS', style: 'tableHeader'}, {text: 'APPROVED/REJECTED BY', style: 'tableHeader'}]].concat(
                         clearances.map((item: { type: any; status: any; staff_fullname: any; }) => [
                         this.capitalizeFirstLetter(item.type),
                         this.capitalizeFirstLetter(item.status),

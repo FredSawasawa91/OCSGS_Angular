@@ -30,8 +30,8 @@ export class StaffLoginComponent implements OnInit {
     if(this.formGroup.valid){
       this.staffAuthService.login(this.formGroup.value).subscribe({
         next: (res) => {
-          console.log(res.token);
           localStorage.setItem('staff_token', res.token);
+          localStorage.setItem('role', res.role);
 
           if(res.role == 'admin'){
             this.router.navigate(['admin_dashboard']);

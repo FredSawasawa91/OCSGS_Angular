@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Edit User</h1>
+<div mat-dialog-content>
+    <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup" (ngSubmit)="editUser()">
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Fullname" formControlName="fullname">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Email" type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select placeholder="Role" formControlName="role">
+                <mat-option value="library">Librarian</mat-option>
+                <mat-option value="admissions">Addmissions</mat-option>
+                <mat-option value="accounts">Accountant</mat-option>
+                <mat-option value="research">Research cordinator</mat-option>
+                <mat-option value="cd">Campus director</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input matInput type="password" placeholder="Password" formControlName="password">
+        </mat-form-field>
+
+        <div mat-dialog-actions [align]="'end'">
+            <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+            <button style="margin-left: 8px;" mat-raised-button color="primary" type="submit">Edit User</button>
+        </div>
+    </form>
+</div>

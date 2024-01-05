@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
     <span>Staff dashboard</span>
     <span class="example-spacer"></span>
+    <button mat-icon-button *ngIf="user_role === 'admissions'" (click)="getApprovedStudents()"><mat-icon>print</mat-icon></button>
     <button mat-button (click)="openProfileDialog()">Profile</button>
     <button mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
@@ -8,7 +9,15 @@
 <div class="container">
     <div style="margin-top: 10px;">
 
-        <mat-form-field>
+        <mat-chip-listbox aria-label="Program selection" class="center-chips" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+          <mat-chip-option class="custom-chip" (click)="filteredClearanceRequest('BAAIS')" >BAAIS</mat-chip-option>
+          <mat-chip-option class="custom-chip" (click)="filteredClearanceRequest('BBME')">BBME</mat-chip-option>
+          <mat-chip-option class="custom-chip" (click)="filteredClearanceRequest('BMIS')">BMIS</mat-chip-option>
+          <mat-chip-option class="custom-chip" (click)="filteredClearanceRequest('BMPR')">BMPR</mat-chip-option>
+          <mat-chip-option class="custom-chip" (click)="filteredClearanceRequest('BBFSM')">BBFSM</mat-chip-option>
+        </mat-chip-listbox>
+
+        <mat-form-field style="margin-top: 16px;">
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
         </mat-form-field>
@@ -18,35 +27,35 @@
           
               <!-- ID Column -->
               <ng-container matColumnDef="student_number">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> STUDENT No </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: bold;"> STUDENT No </th>
                 <td mat-cell *matCellDef="let row"> {{row.student_number}} </td>
               </ng-container>
           
               <!-- Progress Column -->
               <ng-container matColumnDef="fullname">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> FULLNAME </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: bold;"> FULLNAME </th>
                 <td mat-cell *matCellDef="let row"> {{row.fullname}} </td>
               </ng-container>
           
               <!-- Name Column -->
               <ng-container matColumnDef="program">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> PROGRAM </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: bold;"> PROGRAM </th>
                 <td mat-cell *matCellDef="let row"> {{row.program}} </td>
               </ng-container>
           
               <!-- Fruit Column -->
               <ng-container matColumnDef="type">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> REQUEST </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: bold;"> REQUEST </th>
                 <td mat-cell *matCellDef="let row"> {{row.type}} </td>
               </ng-container>
 
               <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: bold;"> STATUS </th>
                 <td mat-cell *matCellDef="let row"> {{row.status}} </td>
               </ng-container>
 
               <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: bold;"> ACTION </th>
                 <td mat-cell *matCellDef="let row"> 
                     <button mat-icon-button color="primary" (click)="approveRequest(row.id, row.email)" 
                     matTooltip="Approve" matTooltipHideDelay="1000">

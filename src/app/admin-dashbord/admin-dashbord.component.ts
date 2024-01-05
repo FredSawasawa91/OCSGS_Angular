@@ -8,6 +8,7 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { Router } from '@angular/router';
 import { StaffProfileComponent } from '../staff-profile/staff-profile.component';
 import Swal from 'sweetalert2';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 /*export interface staffResponse {
   createdAt: string,
@@ -48,6 +49,14 @@ export class AdminDashbordComponent implements OnInit {
     });
   }
 
+  openEditUserProfileDialog(user_id: number) {
+    const dialogRef = this.dialog.open(EditUserComponent, {data: {user_id: user_id}});
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   openProfileDialog() {
     const dialogRef = this.dialog.open(StaffProfileComponent);
   
@@ -60,7 +69,6 @@ export class AdminDashbordComponent implements OnInit {
     this.api.getUsers()
     .subscribe({
         next: (results) => {
-          console.log(results.staff);
           this.dataSource = new MatTableDataSource(results.staff);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort; 
@@ -93,16 +101,6 @@ export class AdminDashbordComponent implements OnInit {
     })
       }
     })
-    
-    /*this.api.deleteUser(id)
-    .subscribe({
-      next: (res) => {
-        alert(res.message);
-      },
-      error: (e) => {
-        alert('User not deleted');
-      }
-    })*/
   }
 
   applyFilter(event: Event) {

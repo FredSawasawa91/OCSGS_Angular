@@ -16,3 +16,10 @@ table {
     width: 100%;
   }
   
+  .custom-chip {
+    margin: 10px; /* Adjust as needed for spacing */
+    font-size: 20px; /* Adjust as needed for font size */
+    padding: 6px; /* Adjust as needed for padding */
+    border: 1px solid;
+  }
+  
