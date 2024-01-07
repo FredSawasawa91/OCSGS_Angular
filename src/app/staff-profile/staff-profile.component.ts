@@ -39,7 +39,7 @@ export class StaffProfileComponent implements OnInit {
         this.formGroup.controls['role'].setValue(res.staff.role);
       },
       error: (e) => {
-        alert('Failed to retrieve profile details');
+        Swal.fire('Error', 'Failed to retrieve profile details', 'error');
       }
     })
   }

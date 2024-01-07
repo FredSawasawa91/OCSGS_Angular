@@ -1,7 +1,16 @@
 <mat-toolbar color="primary">
+    <div mat-card-avatar class="example-header-image"></div>
     <span>Staff dashboard</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button *ngIf="user_role === 'admissions'" (click)="getApprovedStudents()"><mat-icon>print</mat-icon></button>
+    <button mat-icon-button *ngIf="user_role === 'admissions'" [matMenuTriggerFor]="menu"><mat-icon>print</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="getApprovedStudents()">ALL</button>
+      <button mat-menu-item (click)="getApprovedStudentsByType('BAAIS')">BAAIS</button>
+      <button mat-menu-item (click)="getApprovedStudentsByType('BBME')">BBME</button>
+      <button mat-menu-item (click)="getApprovedStudentsByType('BMIS')">BMIS</button>
+      <button mat-menu-item (click)="getApprovedStudentsByType('BMPR')">BMPR</button>
+      <button mat-menu-item (click)="getApprovedStudentsByType('BBFSM')">BBFSM</button>
+    </mat-menu>
     <button mat-button (click)="openProfileDialog()">Profile</button>
     <button mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
@@ -10,6 +19,7 @@
     <div style="margin-top: 10px;">
 
         <mat-chip-listbox aria-label="Program selection" class="center-chips" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+          <mat-chip-option class="custom-chip" (click)="getClearanceRequest()" selected="true"> ALL </mat-chip-option>
           <mat-chip-option class="custom-chip" (click)="filteredClearanceRequest('BAAIS')" >BAAIS</mat-chip-option>
           <mat-chip-option class="custom-chip" (click)="filteredClearanceRequest('BBME')">BBME</mat-chip-option>
           <mat-chip-option class="custom-chip" (click)="filteredClearanceRequest('BMIS')">BMIS</mat-chip-option>

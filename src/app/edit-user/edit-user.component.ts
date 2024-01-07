@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from '../service/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-user',
@@ -36,19 +37,30 @@ export class EditUserComponent {
   }
 
   editUser(){
-    if(this.formGroup.valid){
-      this.api.editUser(this.formGroup.value, this.user_id)
-      .subscribe({
-        next: (result) => {
-          alert(result.message);
-          this.formGroup.reset();
-          this.matDialogRef.close();
-        },
-        error: (err) => {
-          alert('Error updating user details')
+    Swal.fire({
+      title: 'Update User',
+      text: 'Are you sure you want to update user?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if(this.formGroup.valid){
+          this.api.editUser(this.formGroup.value, this.user_id)
+          .subscribe({
+            next: (res) => {
+              Swal.fire('Success', 'User updated successfully', 'success');
+            }, 
+            error: (e) => {
+              Swal.fire('Error', 'Error. User not updated', 'error');
+            }
+          })
+        } else {
+          Swal.fire('Error', 'Form data not valid', 'info');
         }
-      })
-    }
+      }
+    })
   }
 
   fetchUserDetails() {

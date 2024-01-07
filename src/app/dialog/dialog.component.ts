@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ApiService } from '../service/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dialog',
@@ -19,7 +20,8 @@ export class DialogComponent {
       },
       error:(e)=>{
         console.log(e);
-        alert('The request you are trying to create already exists.');
+        //alert('The request you are trying to create already exists.');
+        Swal.fire('Error', 'The request you are trying to create already exists.', 'error');
       }
     })
   }

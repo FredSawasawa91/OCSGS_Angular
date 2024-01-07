@@ -190,14 +190,19 @@ export class StaffDashboardComponent implements OnInit {
       })
   }
 
-  getApprovedStudentsByType(){
-    this.api.getApprovedStudentsByType()
+  getApprovedStudentsByType(program: string){
+    this.api.getApprovedStudents()
     .subscribe({
         next: (results) => {
           console.log(results.Students);
-          //this.dataSource = new MatTableDataSource(results.staff);
-          //this.dataSource.paginator = this.paginator;
-          //this.dataSource.sort = this.sort; 
+
+          const filteredStudents = results.Students.filter((students: { program: string; }) => students.program === program)
+          
+          const ws = XLXS.utils.json_to_sheet(filteredStudents);
+          const wb = XLXS.utils.book_new();
+          XLXS.utils.book_append_sheet(wb, ws, 'Approved Students');
+
+          XLXS.writeFile(wb, 'Approved Students.xlsx');
         },
         error: (err) => {
           console.log(err);
@@ -219,6 +224,5 @@ export class StaffDashboardComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 
 }

@@ -1,3 +1,12 @@
+.example-header-image {
+  background-image: url('../../assets/img/mca.png');
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
 .example-spacer {
     flex: 1 1 auto;
   }
@@ -17,9 +26,9 @@ table {
   }
   
   .custom-chip {
-    margin: 10px; /* Adjust as needed for spacing */
-    font-size: 20px; /* Adjust as needed for font size */
-    padding: 6px; /* Adjust as needed for padding */
-    border: 1px solid;
+    margin: 10px;
+    font-size: 20px;
+    padding: 6px;
+    border: 1px solid rgb(97, 97, 255);
   }
   

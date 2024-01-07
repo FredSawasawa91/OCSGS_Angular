@@ -161,7 +161,7 @@ export class ApiService {
        headers: header,
     };
 
-    return this.http.put(`${baseUrl}/staff`, data, options);
+    return this.http.patch(`${baseUrl}/staff`, data, options);
   }
 
 }
