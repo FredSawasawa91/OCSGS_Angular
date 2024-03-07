@@ -28,6 +28,7 @@ export interface requestAction {
 export class StaffDashboardComponent implements OnInit {
 
   user_role: string | null | undefined;
+  username: string | null | undefined;
 
   displayedColumns: string[] = ['student_number', 'fullname', 'program', 'type', 'status', 'action'];
   dataSource!: MatTableDataSource<any>;
@@ -39,6 +40,7 @@ export class StaffDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user_role = localStorage.getItem('role');
+    this.username = localStorage.getItem('staff_name');
     this.getClearanceRequest();
   }
 
@@ -146,21 +148,6 @@ export class StaffDashboardComponent implements OnInit {
         Swal.fire('Cancelled', 'Cancelled', 'info');
       }
     });
-
-    /*const confirmReject = confirm('Reject student request?');
-
-    if (confirmReject) {
-      this.api.approveRequest(data, id).
-    subscribe({
-      next: (res) => {
-        console.log(res)
-        alert('Request rejected!!');
-      },
-      error: () => {
-        alert('Error!!!');
-      }
-    })
-    }*/
   }
 
   openProfileDialog() {
@@ -213,6 +200,8 @@ export class StaffDashboardComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('staff_token');
+    localStorage.removeItem('staff_name');
+    localStorage.removeItem('role');
     this.router.navigate(['staff_login']);    
   }
 

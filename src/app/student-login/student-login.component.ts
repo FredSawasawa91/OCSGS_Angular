@@ -30,7 +30,8 @@ export class StudentLoginComponent implements OnInit {
     if(this.formGroup.valid){
       this.studentAuthService.login(this.formGroup.value).subscribe({
         next: (res) => {
-          localStorage.setItem('student_token', res.token);  
+          localStorage.setItem('student_token', res.token);
+          localStorage.setItem('student_name', res.student_name);  
           this.router.navigate(['student_dashboard'])
           alert(res.message);
         },

@@ -8,6 +8,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { Router } from '@angular/router';
 import { StudentProfileComponent } from '../student-profile/student-profile.component';
 import { Alignment, Margins } from 'pdfmake/interfaces';
+import { mca_logo } from '../../assets/img';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -30,12 +31,15 @@ export interface Requests {
 })
 export class StudentDashboardComponent implements OnInit {
 
+  student_name: string | null | undefined;
+
   displayedColumns: string[] = ['type', 'status', 'staff_comment'];
   dataSource = new MatTableDataSource<Requests>([]);
 
   constructor(private api: ApiService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
+    this.student_name = localStorage.getItem('student_name');
     this.getClearanceRequest();
   }
 
@@ -55,83 +59,113 @@ export class StudentDashboardComponent implements OnInit {
     this.api.getClearanceDetails()
       .subscribe({
         next: (res) => {
-          console.log(res.clearance);
           const clearances = res.clearance;
+          console.log(clearances);
 
         // Check if clearances array is not empty
         if (clearances && clearances.length > 0) {
           const firstStudentFullName = clearances[0].student_fullname;
           const firstStudentNumber = clearances[0].student_number;
           const firstStudentProgram = clearances[0].program;
+          const year_joined = clearances[0].year_joined;
 
-          clearances.forEach((clearance: { status: any; }, index: number) => {
-            console.log(`Student ${index + 1} Full Name: ${clearance.status}`);
+          //clearances.forEach((clearance: { status: any; }, index: number) => {
+            //console.log(`Student ${index + 1} Full Name: ${clearance.status}`);
 
             let dd = {
               content: [
                 {
-                  text: 'FINAL YEAR CLEARANCE REQUEST REPORT',
-                  style: 'header',
-                  alignment: 'center' as Alignment
+                  image: mca_logo,
+                  width: 200,
+                  height: 200,
+                  alignment: 'center' as Alignment, // Align the image to the center
+                  margin: [0, 0, 0, 0] as Margins // Add margin to create space between the image and other content
                 },
-                {
-                  text: `Student Name: ${firstStudentFullName}`,
-                  style: 'subheader'
-                },
-                {
-                  text: `Student Number: ${firstStudentNumber}`,
-                  style: 'subheader'
-                },
-                {
-                  text: `Program: ${firstStudentProgram}`,
-                  style: 'subheader'
-                },
+                { text: 'CLEARANCE FORM FOR YEAR FOUR STUDENTS', style: 'h1', margin: [0, 40, 0, 0] as Margins, alignment: 'center' as Alignment},
+                { text: 'This is a mandatory form for all year four students before graduation. Please ensure you get cleared for you to be part of the graduation ceremony coming up.', margin: [0, 40, 0, 40] as Margins},
                 {
                   table: {
-                    headerRows: 1,
-                    widths: [ '*', '*', '*' ],
-                    //headers: ['Type', 'Status', 'Student Fullname'],
-                    heights: [20],
-                    body:
-                      [[{text:'SERVICE', style: 'tableHeader'}, {text: 'STATUS', style: 'tableHeader'}, {text: 'APPROVED/REJECTED BY', style: 'tableHeader'}]].concat(
-                        clearances.map((item: { type: any; status: any; staff_fullname: any; }) => [
-                        this.capitalizeFirstLetter(item.type),
-                        this.capitalizeFirstLetter(item.status),
-                        item.staff_fullname
-                      ])) 
+                    layout: 'lightHorizontalLines', // Add horizontal lines
+                    widths: ['*', '*', '*', '*'], // Set column widths
+                    heights: [20, 20, 20, 20, 20, 20, 20, 20, 20], // Set row heights
+                    alignment: 'center' as Alignment,
+                    body: [
+                      [
+                        { text: 'Students Name:', bold: true, alignment: 'left' as Alignment },
+                        { text: `${firstStudentFullName}`, colSpan: 2 },
+                        {}
+                      ],
+                      [
+                        { text: 'Students Number:', bold: true, alignment: 'left' as Alignment },
+                        { text: `${firstStudentNumber}`, colSpan: 2 },
+                        {}
+                      ],
+                      [
+                        { text: 'Programme of Study:', bold: true, alignment: 'left' as Alignment },
+                        { text: `${firstStudentProgram}`, colSpan: 2 },
+                        {}
+                      ],
+                      [
+                        { text: 'Year Joined:', bold: true, alignment: 'left' as Alignment },
+                        { text: `${year_joined}`, colSpan: 2 },
+                        {}
+                      ],
+                      [
+                        { text: '', bold: true },
+                        { text: `STAFF`, bold: true, alignment: 'left' as Alignment},
+                        { text: `STATUS`, bold: true, alignment: 'left' as Alignment},
+                        { text: `COMMENT`, alignment: 'left' as Alignment },
+                      ],
+                      [
+                        { text: 'Library', bold: true, alignment: 'left' as Alignment },
+                        { text: `${clearances[0].staff_fullname}`, alignment: 'left' as Alignment},
+                        { text: `${clearances[0].status}`, alignment: 'left' as Alignment},
+                        { text: '(Comment)', alignment: 'left' as Alignment },
+                      ],
+                      [
+                        { text: 'Admissions', bold: true, alignment: 'left' as Alignment },
+                        { text: `${clearances[2].staff_fullname}`, alignment: 'left' as Alignment},
+                        { text: `${clearances[2].status}`, alignment: 'left' as Alignment},
+                        { text: '(Comment)', alignment: 'left' as Alignment },
+                      ],
+                      [
+                        { text: 'Research Coordinator', bold: true, alignment: 'left' as Alignment },
+                        { text: `${clearances[3].staff_fullname}`, alignment: 'left' as Alignment},
+                        { text: `${clearances[3].status}`, alignment: 'left' as Alignment},
+                        { text: '(Comment)', alignment: 'left' as Alignment },
+                      ],
+                      [
+                        { text: 'Accounts', bold: true, alignment: 'left' as Alignment },
+                        { text: `${clearances[1].staff_fullname}`, alignment: 'left' as Alignment },
+                        { text: `${clearances[1].status}`, alignment: 'left' as Alignment },
+                        { text: '(Comment)', alignment: 'left' as Alignment  },
+                      ],
+                      [{}, 
+                       {}, 
+                       {}, 
+                       { text: 'Campus Director', alignment: 'right' as Alignment }
+                      ]
+                    ]
                   },
                   style: 'table'
                 }
               ],
               styles: {
-                header: {
-                  fontSize: 18,
-                  bold: true,
-                  alignment: 'justify' as Alignment,
-                  margin: [0, 0, 0, 20] as Margins
-                },
-                subheader: {
-                  fontSize: 14,
-                  bold: true,
-                  alignment: 'left' as Alignment,
-                  margin: [0, 10, 0, 0] as Margins
+                h1: {
+                  fontSize: 22,
+                  bold: true
                 },
                 table: {
+                  alignment: 'center' as Alignment,
                   margin: [0, 20, 0, 0] as Margins,
-                  widths: [ '*', 'auto', 100, '*' ]
-                },
-                tableHeader: {
-                  bold: true,
-                  fontSize: 13,
-                  color: 'black'
+                  //widths: [ '*', 'auto', 100, '*' ]
                 }
               }
             };
         
             pdfMake.createPdf(dd).open();
 
-
-          });
+          //});
         } else {
           console.log('No clearance data available.');
         }
@@ -165,6 +199,7 @@ export class StudentDashboardComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('student_token');
+    localStorage.removeItem('student_name');
     this.router.navigate(['']);    
   }
   

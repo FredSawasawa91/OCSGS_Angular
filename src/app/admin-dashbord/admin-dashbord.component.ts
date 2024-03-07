@@ -27,6 +27,9 @@ import { EditUserComponent } from '../edit-user/edit-user.component';
 })
 export class AdminDashbordComponent implements OnInit {
 
+  user_role: string | null | undefined;
+  username: string | null | undefined;
+
   displayedColumns: string[] = ['fullname', 'email', 'role', 'action'];
   dataSource!: MatTableDataSource<any>;
 
@@ -36,6 +39,8 @@ export class AdminDashbordComponent implements OnInit {
   constructor(private dialog: MatDialog, private api: ApiService, private router: Router){}
 
   ngOnInit(): void {
+    this.user_role = localStorage.getItem('role');
+    this.username = localStorage.getItem('staff_name');
     this.getUsers();
   }
 
@@ -97,7 +102,7 @@ export class AdminDashbordComponent implements OnInit {
           },
           error: (e) => {
             Swal.fire('Error', 'User not deleted', 'error');
-      }
+          }
     })
       }
     })
@@ -114,6 +119,8 @@ export class AdminDashbordComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('staff_token');
+    localStorage.removeItem('staff_name');
+    localStorage.removeItem('role');
     this.router.navigate(['staff_login']);    
   }
 }
